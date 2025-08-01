@@ -1,0 +1,13 @@
+# Services (containers) to set.
+services:
+  nginx:
+    build: ./requirements/nginx/
+    networks:
+      - network
+    ports:
+      - "443:443"
+
+# Networks to set.
+networks:
+  network:
+    driver: bridge
