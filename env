@@ -5,4 +5,4 @@ LOGIN='asagymba'
 
 # Docker volumes.
 WP_VOL_PATH="/home/${LOGIN}/data/wordpress"
-DB_VOL_PATH="/home/${LOGIN}/data/wordpress"
+DB_VOL_PATH="/home/${LOGIN}/data/mariadb"

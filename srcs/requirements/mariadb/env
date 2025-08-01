@@ -1,0 +1,8 @@
+# Main SQL DB to create.
+SQL_DB='wordpress'
+
+SQL_ADMIN='root'
+SQL_ADMIN_PASS_FILE_PATH='/run/secrets/db_admin_pass'
+
+SQL_USER='user'
+SQL_USER_PASS_FILE_PATH='/run/secrets/db_user_pass'

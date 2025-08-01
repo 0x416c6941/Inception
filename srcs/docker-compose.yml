@@ -3,12 +3,28 @@ services:
     build: ./requirements/nginx/
     networks:
       - network
-    env_file: ./requirements/nginx/.env
+    env_file: ./requirements/nginx/env
     secrets:
       - asagymba.42.fr.crt
       - asagymba.42.fr.key
+    depends_on:
+      - mariadb
     ports:
       - "443:443"
+    restart: unless-stopped
+  mariadb:
+    build: ./requirements/mariadb/
+    networks:
+      - network
+    env_file: ./requirements/mariadb/env
+    secrets:
+      - db_admin_pass
+      - db_user_pass
+    volumes:
+      - mariadb:/var/lib/mysql
+    expose:
+      - "3306"
+    restart: unless-stopped
 
 networks:
   network:
@@ -19,3 +35,15 @@ secrets:
     file: ./../secrets/asagymba.42.fr.crt
   asagymba.42.fr.key:
     file: ./../secrets/asagymba.42.fr.key
+  db_admin_pass:
+    file: ./../secrets/db_admin_pass
+  db_user_pass:
+    file: ./../secrets/db_user_pass
+
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: "bind"
+      o: "none"
+      device: "${DB_VOL_PATH}"
