@@ -1,13 +1,26 @@
 # Makefile for Inception.
 
+# Docker Compose file path.
 DC_FILE_DIR := ./srcs
 DC_FILE_NAME := docker-compose.yml
+
+# For volumes.
+# It's better NOT to use "${USER}" to prevent
+# removal of user data in "purge" recipe.
+LOGIN := asagymba
+
+# Docker volumes to create in "up" recipe
+# or to remove from the storage in "purge" recipe.
+WP_VOL_PATH := /home/$(LOGIN)/data/wordpress
+DB_VOL_PATH := /home/$(LOGIN)/data/mariadb
 
 .PHONY: all
 all: up
 
 .PHONY: up
 up:
+	@mkdir -p $(WP_VOL_PATH)
+	@mkdir -p $(DB_VOL_PATH)
 	@docker compose -f ${DC_FILE_DIR}/${DC_FILE_NAME} up --build -d
 
 .PHONY: stop
@@ -22,6 +35,12 @@ kill:
 down:
 	@docker compose -f ${DC_FILE_DIR}/${DC_FILE_NAME} down
 
+# Clean images, volumes and networks created in "up" recipe.
 .PHONY: clean
 clean: down
 	@./clean.sh
+
+.PHONY: purge
+purge: clean
+	rm -rf $(WP_VOL_PATH)
+	rm -rf $(DB_VOL_PATH)
