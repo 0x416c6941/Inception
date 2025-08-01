@@ -9,6 +9,5 @@ RUN rm -f /etc/nginx/http.d/default.conf
 COPY ./conf/http.d/server.conf /etc/nginx/http.d/default.conf
 COPY ./scripts/nginx_launcher.sh ./
 RUN chmod +x ./nginx_launcher.sh
-COPY ./data/index.html ./
 
 CMD ["./nginx_launcher.sh"]
