@@ -8,9 +8,24 @@ services:
       - asagymba.42.fr.crt
       - asagymba.42.fr.key
     depends_on:
+      - wordpress
       - mariadb
+    volumes:
+      - wordpress:/var/www/html
     ports:
       - "443:443"
+    restart: unless-stopped
+  wordpress:
+    build: ./requirements/wordpress/
+    networks:
+      - network
+    env_file: ./requirements/wordpress/env
+    secrets:
+      - db_user_pass
+    volumes:
+      - wordpress:/var/www/html
+    expose:
+      - "9000"
     restart: unless-stopped
   mariadb:
     build: ./requirements/mariadb/
@@ -41,6 +56,12 @@ secrets:
     file: ./../secrets/db_user_pass
 
 volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: "bind"
+      o: "none"
+      device: "${WP_VOL_PATH}"
   mariadb:
     driver: local
     driver_opts:

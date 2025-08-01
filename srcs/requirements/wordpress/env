@@ -1,0 +1,4 @@
+SQL_DB='wordpress'
+
+SQL_USER='user'
+SQL_USER_PASS_FILE_PATH='/run/secrets/db_user_pass'
