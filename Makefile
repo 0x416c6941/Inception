@@ -12,8 +12,8 @@ all: up
 
 .PHONY: up
 up:
-	mkdir -p $(WP_VOL_PATH)
-	mkdir -p $(DB_VOL_PATH)
+	@mkdir -p $(WP_VOL_PATH)
+	@mkdir -p $(DB_VOL_PATH)
 	@docker compose -f ${DC_FILE_DIR}/${DC_FILE_NAME} up --build -d
 
 .PHONY: stop
