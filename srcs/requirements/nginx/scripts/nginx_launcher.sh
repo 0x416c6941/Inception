@@ -10,4 +10,5 @@ if [ ! -f /etc/nginx/ssl/asagymba.42.fr.key ]; then
 	mkdir -p /etc/nginx/ssl
 	cp "${SSL_KEY_PATH}" /etc/nginx/ssl/asagymba.42.fr.key
 fi
+sed -i "s/DOMAIN_NAME/${DOMAIN_NAME}/g" /etc/nginx/http.d/default.conf
 exec nginx

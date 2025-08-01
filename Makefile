@@ -1,7 +1,7 @@
 # Makefile for Inception.
 
 # Sourcing "env".
-include ./env
+include ./srcs/env
 
 # For volume creation in 'up' recipe and removal in 'purge' recipe.
 # Thanks, Gemini, for the `sed` command.
@@ -9,7 +9,7 @@ CLEAN_WP_PATH := $(shell echo $(WP_VOL_PATH) | sed -e "s/'//g" -e 's/"//g')
 CLEAN_DB_PATH := $(shell echo $(DB_VOL_PATH) | sed -e "s/'//g" -e 's/"//g')
 
 # Docker Compose command.
-DC_CMD := docker compose -f ./srcs/docker-compose.yml --env-file ./env
+DC_CMD := docker compose -f ./srcs/docker-compose.yml --env-file ./srcs/env
 
 .PHONY: all
 all: up

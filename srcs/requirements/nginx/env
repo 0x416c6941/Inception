@@ -1,2 +1,4 @@
 SSL_CRT_PATH="/run/secrets/asagymba.42.fr.crt"
 SSL_KEY_PATH="/run/secrets/asagymba.42.fr.key"
+
+DOMAIN_NAME="asagymba.42.fr"
