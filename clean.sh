@@ -8,9 +8,9 @@
 
 NAME_PREFIX="srcs"
 
-IMAGE_IDS=$(docker images --filter reference="${NAME_PREFIX}*"		\
+IMAGE_IDS=$(docker images --filter reference="${NAME_PREFIX}-*"		\
 	--format '{{.ID}}')
-NETWORK_IDS=$(docker network ls --filter name="${NAME_PREFIX}*"		\
+NETWORK_IDS=$(docker network ls --filter name="${NAME_PREFIX}_*"	\
 	--format '{{.ID}}')
 
 # Images.
