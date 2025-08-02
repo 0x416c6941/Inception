@@ -59,12 +59,12 @@ volumes:
   wordpress:
     driver: local
     driver_opts:
-      type: "bind"
-      o: "none"
+      type: "none"
+      o: "bind"
       device: "${WP_VOL_PATH}"
   mariadb:
     driver: local
     driver_opts:
-      type: "bind"
-      o: "none"
+      type: "none"
+      o: "bind"
       device: "${DB_VOL_PATH}"
